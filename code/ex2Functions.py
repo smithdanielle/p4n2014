@@ -6,7 +6,7 @@ text = visual.TextStim(win)
 # Messages
 welcome = 'hi and welcome to this experiment'
 instruction = 'really, there\'s not much to do. We just show a bunch of messages. Press RETURN to continue.'
-thanks  'thank you and goodbye. We hope you enjoyed!'
+thanks = 'thank you and goodbye. We hope you enjoyed!'
 
 # Show welcome message
 text.setText(welcome)  # set text
@@ -21,7 +21,7 @@ text.setText(instruction)
 text.draw()
 win.flip()
 response = event.waitKeys(keyList=['return', 'q'])  # listen for return and q only
-if response[1] == 'q':
+if response[0] == 'q':
     core.quit()
 
 # Show debriefing
@@ -29,5 +29,3 @@ text.setText(thanks)
 text.draw()
 win.flip()
 response = event.waitKeys#(keyList=None)  # accepts all keys
-if response[0] == 'q':
-    core.quit()
