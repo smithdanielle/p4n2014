@@ -1,31 +1,34 @@
 # Load psychopy modules
 from psychopy import visual, event, core
-win = visual.Window(size=[500, 500])
-text = visual.TextStim(win)
 
+# Initialise stimuli
+win = visual.Window(size=[500, 500])
+textStim = visual.TextStim(win)
 # Messages
 welcome = 'hi and welcome to this experiment'
 instruction = 'really, there\'s not much to do. We just show a bunch of messages. Press RETURN to continue.'
 thanks = 'thank you and goodbye. We hope you enjoyed!'
 
+# Create a function to show text
+def showText(input, acceptedKeys=None):
+    """Presents text and waits for accepted keys"""
+    
+    # Set and display text
+    textStim.setText(input)
+    textStim.draw()
+    win.flip()
+    
+    # Wait for response and return it
+    response = event.waitKeys(keyList=acceptedKeys)
+    if response[0] == 'q':
+        core.quit()
+    return response
+
 # Show welcome message
-text.setText(welcome)  # set text
-text.draw()  # prepare to show it
-win.flip()  # actually show it
-response = event.waitKeys(keyList=None)  # accepts all keys
-if response[0] == 'q':  # response[0] is the name of the first pressed key
-    core.quit()  # quit if 'q' was pressed
+showText(welcome)
 
 # Show instruction
-text.setText(instruction)
-text.draw()
-win.flip()
-response = event.waitKeys(keyList=['return', 'q'])  # listen for return and q only
-if response[0] == 'q':
-    core.quit()
+showText(instruction, ['return', 'q'])
 
 # Show debriefing
-text.setText(thanks)
-text.draw()
-win.flip()
-response = event.waitKeys#(keyList=None)  # accepts all keys
+showText(thanks)
